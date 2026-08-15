@@ -1,0 +1,49 @@
+{
+  "name": "dsh-timeline-studio-plugin",
+  "version": "0.1.0",
+  "description": "DeepSeek Harness tools and Agent Skill adapter for Timeline Studio.",
+  "license": "MIT",
+  "type": "module",
+  "exports": "./src/index.js",
+  "files": [
+    "src",
+    ".dsh",
+    "config",
+    "docs",
+    "README.md",
+    "README.zh-CN.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": "^22.20.0 || >=24.0.0"
+  },
+  "scripts": {
+    "check": "node --check src/index.js && node --check src/command-runner.js && npm run test",
+    "test": "node --test test/command-runner.test.js",
+    "test:e2e": "node --test test/deepseek-harness.e2e.test.js"
+  },
+  "dependencies": {
+    "@deepseek-ai/dsh-tools": "0.1.0-rc.6"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "^4.0.1"
+  },
+  "peerDependenciesMeta": {
+    "@deepseek-ai/cordis": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@deepseek-ai/cordis": "4.0.1",
+    "@deepseek-ai/dsh-llm": "0.1.0-rc.6",
+    "@deepseek-ai/dsh-system-prompt": "0.1.0-rc.6",
+    "fflate": "0.8.3"
+  },
+  "keywords": [
+    "deepseek-harness",
+    "dsh-plugin",
+    "timeline-studio",
+    "video-editing",
+    "agent-skill"
+  ]
+}

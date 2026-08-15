@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="600" viewBox="0 0 1600 600" role="img" aria-labelledby="title desc">
+  <title id="title">Timeline Studio plugin capabilities</title>
+  <desc id="desc">The plugin understands a project, safely previews changes, and delivers editable projects and videos.</desc>
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#11141b"/><stop offset="1" stop-color="#1b1f2a"/></linearGradient>
+    <linearGradient id="line" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#5e8dff"/><stop offset="1" stop-color="#5ad7dc"/></linearGradient>
+    <filter id="s" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#000" flood-opacity=".3"/></filter>
+  </defs>
+  <rect width="1600" height="600" rx="36" fill="url(#bg2)"/>
+  <text x="800" y="82" text-anchor="middle" fill="#f7f9ff" font-family="Inter, Arial, sans-serif" font-size="38" font-weight="700">玩家能用它做什么？ / What can players do?</text>
+  <path d="M280 150h1040" stroke="url(#line)" stroke-width="4" stroke-linecap="round"/>
+
+  <g filter="url(#s)" font-family="Inter, Arial, sans-serif">
+    <rect x="95" y="195" width="430" height="300" rx="28" fill="#222631" stroke="#353b4c"/>
+    <rect x="585" y="195" width="430" height="300" rx="28" fill="#222631" stroke="#353b4c"/>
+    <rect x="1075" y="195" width="430" height="300" rx="28" fill="#222631" stroke="#353b4c"/>
+
+    <circle cx="155" cy="255" r="32" fill="#263c68"/><path d="M138 255c12-17 25-17 37 0-12 17-25 17-37 0Z" fill="none" stroke="#78a9ff" stroke-width="4"/><circle cx="156" cy="255" r="6" fill="#78a9ff"/>
+    <text x="210" y="255" fill="#f7f9ff" font-size="28" font-weight="700">理解工程</text>
+    <text x="210" y="286" fill="#94a0b8" font-size="17">Understand</text>
+    <text x="145" y="350" fill="#d0d6e3" font-size="20">• 工程、轨道与片段</text>
+    <text x="145" y="392" fill="#d0d6e3" font-size="20">• 字幕、时间与音频关联</text>
+    <text x="145" y="434" fill="#d0d6e3" font-size="20">• 时长、画幅和媒体清单</text>
+
+    <circle cx="645" cy="255" r="32" fill="#253f54"/><path d="m630 255 11 11 22-25" fill="none" stroke="#63d7d8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="700" y="255" fill="#f7f9ff" font-size="28" font-weight="700">安全编辑</text>
+    <text x="700" y="286" fill="#94a0b8" font-size="17">Plan safely</text>
+    <text x="635" y="350" fill="#d0d6e3" font-size="20">• 修改前先做语义预演</text>
+    <text x="635" y="392" fill="#d0d6e3" font-size="20">• 版本校验避免覆盖新改动</text>
+    <text x="635" y="434" fill="#d0d6e3" font-size="20">• 重复操作不会执行两次</text>
+
+    <circle cx="1135" cy="255" r="32" fill="#3a315a"/><path d="M1118 237h35v38h-35z" fill="none" stroke="#ae91ff" stroke-width="4"/><path d="m1127 257 7 7 13-15" fill="none" stroke="#ae91ff" stroke-width="4"/>
+    <text x="1190" y="255" fill="#f7f9ff" font-size="28" font-weight="700">交付结果</text>
+    <text x="1190" y="286" fill="#94a0b8" font-size="17">Deliver</text>
+    <text x="1125" y="350" fill="#d0d6e3" font-size="20">• 保留可继续编辑的工程</text>
+    <text x="1125" y="392" fill="#d0d6e3" font-size="20">• 输出并验证 H.264 MP4</text>
+    <text x="1125" y="434" fill="#d0d6e3" font-size="20">• 明确报告不支持的效果</text>
+  </g>
+</svg>

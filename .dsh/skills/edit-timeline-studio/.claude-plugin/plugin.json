@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "timeline-studio",
+  "displayName": "Timeline Studio",
+  "version": "0.9.2",
+  "description": "Professionally auto-edit and replicate reference-video timing, filters, motion, framing, highlights, and tension into editable Timeline Studio projects with verified rendering.",
+  "author": {
+    "name": "MartinDelophy",
+    "url": "https://github.com/MartinDelophy"
+  },
+  "homepage": "https://video-editor.ai-creator.top/",
+  "repository": "https://github.com/MartinDelophy/ai-video-editor",
+  "license": "MIT",
+  "keywords": [
+    "video-editing",
+    "automatic-video-editing",
+    "editing-style-replication",
+    "highlight-editing",
+    "ai-video",
+    "timeline",
+    "captions",
+    "voiceover",
+    "media"
+  ]
+}

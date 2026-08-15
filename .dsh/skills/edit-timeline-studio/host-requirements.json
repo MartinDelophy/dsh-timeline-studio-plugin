@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "runtimeHome": "timeline-studio/skill-runtime",
+  "requiredCommands": [
+    {
+      "id": "node",
+      "command": "node",
+      "minimumVersion": "22.20.0",
+      "purpose": "Run the Skill doctor, installer, and Timeline Studio command tooling"
+    },
+    {
+      "id": "ffmpeg",
+      "command": "ffmpeg",
+      "minimumVersion": "6.0.0",
+      "purpose": "Decode, filter, render, and inspect media"
+    },
+    {
+      "id": "ffprobe",
+      "command": "ffprobe",
+      "minimumVersion": "6.0.0",
+      "purpose": "Probe media streams, timing, dimensions, and codecs"
+    },
+    {
+      "id": "python",
+      "commands": ["python3.11", "python3", "python"],
+      "minimumVersion": "3.10.0",
+      "purpose": "Run local replication and evidence-analysis scripts"
+    }
+  ],
+  "pythonPackages": [
+    {
+      "distribution": "numpy",
+      "import": "numpy",
+      "version": "2.2.6",
+      "purpose": "Numerical signal, frame, and score analysis"
+    },
+    {
+      "distribution": "opencv-python-headless",
+      "import": "cv2",
+      "version": "4.12.0.88",
+      "purpose": "Local frame decoding, optical flow, shot, look, and repetition evidence"
+    }
+  ],
+  "optionalCapabilities": {},
+  "neverAutomatic": [
+    "GPU drivers or operating-system upgrades",
+    "large AI model artifacts or model-family caches",
+    "paid or remote generation services",
+    "credentials, account sessions, or browser extensions"
+  ]
+}

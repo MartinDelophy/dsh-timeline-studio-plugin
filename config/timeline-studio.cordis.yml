@@ -1,0 +1,6 @@
+- name: 'dsh-timeline-studio-plugin'
+  config:
+    timelineStudioRoot: !!js process.env.TIMELINE_STUDIO_ROOT
+    allowedRoots: !!js [process.env.TIMELINE_PROJECTS_ROOT ?? process.cwd()]
+    nodeCommand: !!js process.execPath
+    maxOutputBytes: 8388608
