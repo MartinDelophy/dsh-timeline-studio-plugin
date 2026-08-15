@@ -1,5 +1,21 @@
 # 安装与接入
 
+## 推荐：作为 DSH Bundle 安装
+
+```sh
+dsh plugin --profile web add "github:MartinDelophy/dsh-timeline-studio-plugin#main"
+```
+
+启动时配置本地 Timeline Studio 与允许访问的工程目录：
+
+```sh
+TIMELINE_STUDIO_ROOT=/绝对路径/web_player \
+TIMELINE_PROJECTS_ROOT=/绝对路径/projects \
+dsh --profile web
+```
+
+Bundle 未检测到 `TIMELINE_STUDIO_ROOT` 时会保持禁用；设置后重新启动即可挂载。
+
 [English](integration.md) | 简体中文
 
 ## 架构

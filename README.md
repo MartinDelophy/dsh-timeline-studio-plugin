@@ -63,6 +63,24 @@ Browser-only WebGPU generation and rich browser rendering remain in the Timeline
 
 ## Quick start
 
+The recommended route is to install the GitHub repository as a bundle in the DSH Web profile:
+
+```sh
+dsh plugin --profile web add "github:MartinDelophy/dsh-timeline-studio-plugin#main"
+```
+
+Launch Harness with absolute paths for the Timeline Studio checkout and project workspace:
+
+```sh
+TIMELINE_STUDIO_ROOT=/absolute/path/to/web_player \
+TIMELINE_PROJECTS_ROOT=/absolute/path/to/projects \
+dsh --profile web
+```
+
+The bundle remains disabled when `TIMELINE_STUDIO_ROOT` is unset, so an unconfigured installation cannot break an existing Harness profile. Set the environment variables and restart, then verify the enabled and mounted state under **Settings → Plugins → Plugin list**.
+
+For local plugin development, npm link is also supported:
+
 ```sh
 cd /absolute/path/dsh-timeline-studio-plugin
 npm install
@@ -72,7 +90,7 @@ cd /absolute/path/to/deepseek-harness
 npm link dsh-timeline-studio-plugin
 ```
 
-Add the plugin to the Cordis composition used by your Harness preset:
+When not using the bundle installation, add the plugin manually to the Cordis composition used by your Harness preset:
 
 ```yaml
 - name: 'dsh-timeline-studio-plugin'

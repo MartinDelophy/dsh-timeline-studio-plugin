@@ -1,5 +1,21 @@
 # Installation and integration
 
+## Recommended: install as a DSH bundle
+
+```sh
+dsh plugin --profile web add "github:MartinDelophy/dsh-timeline-studio-plugin#main"
+```
+
+Configure the local Timeline Studio checkout and allowed project directory when launching:
+
+```sh
+TIMELINE_STUDIO_ROOT=/absolute/path/to/web_player \
+TIMELINE_PROJECTS_ROOT=/absolute/path/to/projects \
+dsh --profile web
+```
+
+The bundle remains disabled until `TIMELINE_STUDIO_ROOT` is present; restart after setting it to mount the plugin.
+
 English | [简体中文](integration.zh-CN.md)
 
 ## Architecture

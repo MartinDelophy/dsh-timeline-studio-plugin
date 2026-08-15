@@ -1,0 +1,12 @@
+# DeepSeek Harness bundle layer. The plugin stays dormant until the Timeline
+# Studio checkout is provided, so installing it cannot break an existing
+# profile that has not been configured yet.
+- insert:
+    - id: timeline-studio
+      name: dsh-timeline-studio-plugin
+      disabled: !!js "!process.env.TIMELINE_STUDIO_ROOT"
+      config:
+        timelineStudioRoot: !!js "process.env.TIMELINE_STUDIO_ROOT"
+        allowedRoots: !!js "[process.env.TIMELINE_PROJECTS_ROOT ?? process.cwd()]"
+        nodeCommand: !!js "process.execPath"
+        maxOutputBytes: 8388608

@@ -63,6 +63,24 @@ WebGPU AI 生成和复杂浏览器渲染仍由 Timeline Studio 编辑器负责�
 
 ## 快速开始
 
+推荐直接把 GitHub 仓库安装为 DSH Web profile 的 Bundle：
+
+```sh
+dsh plugin --profile web add "github:MartinDelophy/dsh-timeline-studio-plugin#main"
+```
+
+启动 Harness 时提供 Timeline Studio 和工程工作区的绝对路径：
+
+```sh
+TIMELINE_STUDIO_ROOT=/绝对路径/web_player \
+TIMELINE_PROJECTS_ROOT=/绝对路径/projects \
+dsh --profile web
+```
+
+Bundle 在未设置 `TIMELINE_STUDIO_ROOT` 时保持禁用，避免尚未配置的安装影响现有 Harness profile。设置环境变量并重新启动后，可以在 **设置 → 插件 → 插件列表** 中确认它已经启用并挂载。
+
+本地插件开发也可以使用 npm link：
+
 ```sh
 cd /绝对路径/dsh-timeline-studio-plugin
 npm install
@@ -72,7 +90,7 @@ cd /绝对路径/deepseek-harness
 npm link dsh-timeline-studio-plugin
 ```
 
-在 Harness preset 使用的 Cordis 组合中加入插件：
+如果不使用 Bundle 安装，也可以手动在 Harness preset 使用的 Cordis 组合中加入插件：
 
 ```yaml
 - name: 'dsh-timeline-studio-plugin'
