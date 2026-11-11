@@ -14,7 +14,15 @@ TIMELINE_PROJECTS_ROOT=/绝对路径/projects \
 dsh --profile web
 ```
 
-Bundle 未检测到 `TIMELINE_STUDIO_ROOT` 时会保持禁用；设置后重新启动即可挂载。
+将 `TIMELINE_STUDIO_ROOT` 设为包含 `scripts/timeline-command.mjs` 的仓库根目录，然后重启 Harness。未设置时 Bundle 保持禁用。
+
+Windows 用户可在 PowerShell 中启动。
+
+```powershell
+$env:TIMELINE_STUDIO_ROOT = 'C:\dev\web_player'
+$env:TIMELINE_PROJECTS_ROOT = 'C:\media\projects'
+dsh --profile web
+```
 
 [English](integration.md) | 简体中文
 
@@ -50,12 +58,12 @@ Bundle 未检测到 `TIMELINE_STUDIO_ROOT` 时会保持禁用；设置后重新�
 
 DeepSeek Harness 会从 `<projectRoot>/.dsh/skills` 发现项目 Skill。本仓库已经包含 `.dsh/skills/edit-timeline-studio`。
 
-如果把 npm 插件链接到另一个 Harness 工作区，需要把完整 Skill 目录复制或链接到目标工作区。`SKILL.md` 必须和其中的 `references`、`docs`、`scripts` 子目录一起保留。
+在 Harness 用户目录下的 `profiles/web/node_modules/dsh-timeline-studio-plugin/.dsh/skills/edit-timeline-studio` 找到随包 Skill。把该目录复制到工作区的 `.dsh/skills`，或复制到 `$DSH_HOME/skills`（默认 `~/.dsh/skills`）供所有工作区使用。请保留 `SKILL.md` 及其 `references`、`docs`、`scripts` 子目录。升级 Bundle 后同步更新这份副本。
 
 ## 能力边界
 
-命令路径目前支持便携工程检查、已注册编辑操作、媒体导入，以及文档规定的 Visuals + Voiceover + Music MP4 渲染。AI 生成、可见字幕、贴纸、叠加层、高级效果和其他仅浏览器渲染能力仍由编辑器执行。遇到不支持的合成特性时，渲染会明确失败，不会静默省略。
+命令路径目前支持便携工程检查、已注册编辑操作、媒体导入，以及文档规定的 Visuals + Voiceover + Music MP4 渲染。音效库、高级合成、卡点模板追加和保留淡入淡出的成片导出均在编辑器中完成。通过 WebMCP 追加模板也在已打开的编辑器里执行。
 
 ## 版本策略
 
-插件已针对 DeepSeek Harness `0.1.0-rc.6`、`@deepseek-ai/dsh-tools` `0.1.0-rc.6` 和 Cordis `4.0.1` 完成验证。Harness 仍处于 Developer Preview，升级这些包时应明确修改版本，并重新运行 `npm run check` 与 `npm run test:e2e`。
+插件直接使用宿主的 `tools` 服务，安装包不携带 Harness 运行时依赖。已验证版本和验证步骤见[测试文档](testing.zh-CN.md)。

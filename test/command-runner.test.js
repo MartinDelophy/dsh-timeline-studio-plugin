@@ -41,6 +41,7 @@ test("registers the complete model-facing tool set", async () => {
   });
   assert.deepEqual(registrations.map((item) => item.name).sort(), [
     "timeline_studio_clip_inspect",
+    "timeline_studio_marker_inspect",
     "timeline_studio_project_apply",
     "timeline_studio_project_diff",
     "timeline_studio_project_inspect",
@@ -48,6 +49,10 @@ test("registers the complete model-facing tool set", async () => {
     "timeline_studio_track_inspect",
     "timeline_studio_transcript_inspect",
   ]);
+  const marker = registrations.find((item) => item.name === "timeline_studio_marker_inspect");
+  assert.deepEqual(marker.parameters.required, ["project"]);
+  await assert.rejects(marker.execute({}, {}), /Missing tool argument: project/);
+  await assert.rejects(marker.execute({ project: "demo", markerId: 7 }, {}), /markerId must be a string/);
 });
 
 test("rejects project paths outside allowedRoots", async () => {

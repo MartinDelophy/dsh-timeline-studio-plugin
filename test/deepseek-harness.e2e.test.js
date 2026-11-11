@@ -64,6 +64,7 @@ test("DeepSeek Harness executes the complete Timeline Studio project workflow", 
     operations: [
       { id: "import-visual-001", type: "asset.import", file: sourceImage, track: "visuals", clipId: "visual-001", name: "E2E source", duration: 1, width: 64, height: 64 },
       { id: "set-ratio-001", type: "project.set_ratio", ratio: "9:16" },
+      { id: "mark-review-001", type: "marker.add", markerId: "review", markerType: "range", time: 0.1, endTime: 0.6, title: "Review" },
     ],
     output: { project: outputProject },
   }, null, 2));
@@ -83,6 +84,7 @@ test("DeepSeek Harness executes the complete Timeline Studio project workflow", 
   const toolNames = harness.tools.schemas().map((schema) => schema.name).sort();
   assert.deepEqual(toolNames, [
     "timeline_studio_clip_inspect",
+    "timeline_studio_marker_inspect",
     "timeline_studio_project_apply",
     "timeline_studio_project_diff",
     "timeline_studio_project_inspect",
@@ -99,7 +101,8 @@ test("DeepSeek Harness executes the complete Timeline Studio project workflow", 
   const diff = await call(harness, 2, "timeline_studio_project_diff", { plan: planPath });
   assert.equal(diff.isError, false);
   assert.equal(diff.value.revision, 1);
-  assert.deepEqual(diff.value.appliedOperationIds, ["import-visual-001", "set-ratio-001"]);
+  assert.deepEqual(diff.value.appliedOperationIds, ["import-visual-001", "set-ratio-001", "mark-review-001"]);
+  assert.equal(diff.value.diff.changes.markers.added[0].id, "review");
   await assert.rejects(access(outputProject));
 
   const applied = await call(harness, 3, "timeline_studio_project_apply", { plan: planPath });
@@ -140,6 +143,12 @@ test("DeepSeek Harness executes the complete Timeline Studio project workflow", 
   const denied = await call(harness, 9, "timeline_studio_project_inspect", { project: resolve(projectRoot, "package.json") });
   assert.equal(denied.isError, true);
   assert.match(denied.content[0].text, /outside the configured allowedRoots/);
+
+  const marker = await call(harness, 10, "timeline_studio_marker_inspect", { project: outputProject, markerId: "review" });
+  assert.equal(marker.isError, false);
+  assert.equal(marker.value.markerCount, 1);
+  assert.equal(marker.value.markers[0].time, 0.1);
+  assert.equal(marker.value.markers[0].endTime, 0.6);
 
   const outputArchive = await readFile(outputProject);
   assert.ok(outputArchive.length > 0);

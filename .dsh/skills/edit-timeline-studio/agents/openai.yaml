@@ -1,4 +1,4 @@
 interface:
   display_name: "AI Video Editing with Timeline Studio"
-  short_description: "Frame-accurate editing, replication, and delivery"
-  default_prompt: "Use $edit-timeline-studio to reconstruct the reference video's shots, filters, repeated motifs, source splits, speed curves, transitions, and audio timing before building and validating an editable .timeline project plus rendered video."
+  short_description: "Precise video editing, timeline markers, and subject effects"
+  default_prompt: "Use $edit-timeline-studio to inspect the project, plan edits or timeline markers, preview the semantic diff, and validate a new editable .timeline project; for video edits, consider source-time speed curves, Color Wheels, verified subject effects, editable relighting and depth-video conversion, then render the requested video."

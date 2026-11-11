@@ -54,7 +54,7 @@ After hard gates pass, score each area from 1–5: content understanding, select
 
 **Ask only if missing:** The viewer's required outcome; mandatory steps; treatment of failed attempts; permission to speed up waiting; delivery platform.
 
-**Default:** Preserve action/result pairs and original order, remove the failed attempt only when it teaches nothing, shorten waiting with a truthful visual indication, mask or omit private information, and keep instructional audio intelligible above music.
+**Default:** Use narration, preserve action/result pairs and original order, remove the failed attempt only when it teaches nothing, shorten waiting with a truthful visual indication, mask or omit private information, and keep instructional audio intelligible above music. Reuse complete authorized source instruction; otherwise synthesize the missing instructional spine with the owned pinned local voice route before timing picture, without duplicating existing speech.
 
 **Acceptance focus:** A new viewer can reproduce the task. No spoken instruction precedes or follows the wrong visual action, no required click/result is omitted, and captions do not cover the active control.
 
@@ -86,7 +86,7 @@ After hard gates pass, score each area from 1–5: content understanding, select
 
 **Ask only if missing:** Chronology versus energy; featured people/places/moments; target duration/platform; music direction and privacy exclusions.
 
-**Default:** Preserve a comprehensible event arc, use varied technically acceptable shots, retain selected natural-sound moments, avoid repeating the same action, and use music only when authorized.
+**Default:** Use narration to connect the event arc, while preserving selected natural-sound moments. Reuse suitable authorized source speech when available; otherwise synthesize a concise local voiceover before timing picture. Use varied technically acceptable shots, avoid repeating the same action, and use music only when authorized.
 
 **Acceptance focus:** The cut has an opening, progression, and ending; shot selection is diverse; no essential person or moment is omitted; music edits do not erase meaningful natural sound or end abruptly.
 
@@ -102,7 +102,7 @@ After hard gates pass, score each area from 1–5: content understanding, select
 
 **Ask only if missing:** Target audience; one primary value proposition; approved claims/proof; offer and call to action; brand and platform requirements.
 
-**Default:** Do not invent claims, prices, urgency, testimonials, or offers. Prefer problem/value, proof, then call to action; omit unsupported beauty shots when they weaken clarity.
+**Default:** Use narration to carry the complete problem/value, proof, payoff, and call-to-action arc. Reuse authorized presenter speech when it already covers a beat; otherwise synthesize the missing script with the owned pinned local voice route before timing picture. Do not invent claims, prices, urgency, testimonials, or offers; omit unsupported beauty shots when they weaken clarity.
 
 **Acceptance focus:** Every material claim is supplied and supported, the product shown matches the spoken claim, required brand elements are legible, and the agreed call to action is present without obscuring the product.
 
@@ -118,7 +118,7 @@ After hard gates pass, score each area from 1–5: content understanding, select
 
 **Ask only if missing:** Story focus; target duration; chronology/reordering permission; spoiler policy; indispensable events or people.
 
-**Default:** Preserve chronology, causality, identity, and the core emotional turn. Prefer removing redundant coverage over restructuring the story.
+**Default:** Use narration to make chronology, causality, identity, and the core emotional turn understandable, while preserving meaningful source dialogue and ambient sound. Reuse an authorized source narrator when sufficient; otherwise synthesize the missing connective narration with the owned pinned local voice route before timing picture. Prefer removing redundant coverage over restructuring the story.
 
 **Acceptance focus:** A first-time viewer can explain who acted, what changed, and why. No continuity edit reverses causality, no emotional pause is removed as dead air, and captions or music do not flatten the key emotional beat.
 

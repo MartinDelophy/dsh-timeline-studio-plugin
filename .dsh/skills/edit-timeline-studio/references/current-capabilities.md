@@ -4,7 +4,11 @@
 
 - Editable main Visuals sequence plus timed picture-in-picture overlays
 - Captions, stickers, voiceover, separated source audio, and music tracks
-- Visual transforms, property keyframes, masks, filters, effects, speed, and animations
+- Search and audition 120 built-in sound effects, place them on audio lanes, and edit volume and fades on the timeline. Multi-clip drag guides align selected timed clips while preserving their spacing.
+- Persistent markers, chapters, ranges, and notes; compact ruler flags by default, expandable titles/ranges, and UI snapping with Alt bypass
+- Visual transforms, property keyframes, masks, filters, effects, constant speed, and editable source-time speed curves with up to eight nodes and optional smooth joins
+- Keyframeable Color Wheels for shadows, midtones, highlights, and global offset, plus temperature, tint, and saturation controls
+- Person cutout for images and video, product/object cutout analysis, person and object outline styling, and local authorized face swap for a selected image or video target
 - Automatic captions; Hojo TTS Light 80M FP16 WebGPU Chinese/mixed Chinese-English TTS with 晴岚 and 若溪; other owned multilingual browser TTS; vocal separation; and vision analysis
 - Portable `.timeline` ZIP archives containing `project.json` and media binaries
 - Offline WebCodecs composition/export with a recorder fallback
@@ -13,15 +17,22 @@
 ## Available to an Agent today
 
 - Repository inspection and code changes
+- Native browser WebMCP for the open project covers metadata and media inspection, reviewed edits and asset insertion, beat template appends, mask junctions, local AI jobs, save, undo and export. Discover the current schema and see [beat-templates.md](beat-templates.md) for template inputs and renderer limits.
 - Browser-driven operation of the running editor
 - Import and export through visible file controls
 - Pure timeline helper functions in `src/lib/`
-- Versioned `project.inspect`, `track.inspect`, `clip.inspect`, `transcript.inspect`, field-level `project.diff`, and `project.run` commands, with legacy `inspect`/`run` aliases
+- Versioned `project.inspect`, `track.inspect`, `clip.inspect`, `transcript.inspect`, `marker.inspect`, field-level `project.diff`, and `project.run` commands, with legacy `inspect`/`run` aliases
+- Revision-checked `marker.add`, `marker.update`, and `marker.delete` operations through the same CLI/MCP engine, full annotation inspection, marker counts by type, and semantic annotation diffs
+- A local STDIO MCP server in the Timeline Studio checkout that exposes the same inspect, diff, apply, and render command layer to Codex without duplicating reducers
 - Transactional, revision-checked, idempotent edits for probed and hashed visual/audio import to Visuals, Music, or multiple portable Voiceover clips; timed edits, captions, Visuals/Overlays, transitions, validated properties, track state, and ratio
 - Portable `.timeline` output that preserves archived media entries while replacing only versioned project metadata
 - Transactional local `project.render` for the portable Visuals + Voiceover + Music subset, with ffprobe verification and explicit rejection of unsupported composition features
 
-Browser-driven editing is a compatibility mechanism, not a stable public API. UI labels, selection state, drag thresholds, and file pickers make it unsuitable for unattended or idempotent jobs.
+Native browser WebMCP is an experimental structured interface for the documented live-editor subset; availability depends on the browser and agent host. UI automation remains a compatibility mechanism whose labels, selection state, drag thresholds and file pickers are unsuitable for unattended or idempotent jobs. The local STDIO MCP/CLI path remains the default for project files.
+
+For long-video anchors, chapter structure, beat cues, and revision notes, read [timeline-markers.md](timeline-markers.md). Marker-only edits work locally without browser automation or rendering. Annotations retain absolute project times, do not move automatically with ripple edits, and do not change rendered duration or produce visible overlays/container chapters. Beat detection and source-to-project cue mapping remain evidence-driven planning work rather than automatic marker-command capabilities.
+
+Color Wheels, speed curves, and the advanced subject-effect stack are currently editor/browser capabilities. The portable headless renderer explicitly rejects projects containing color grading, `speedCurve`, vision-derived masks, or other visual effects; do not claim headless render parity for them. Face-swap results are generated as new My assets and are not inserted into or substituted on the timeline automatically.
 
 Observed browser-path constraints:
 
@@ -54,5 +65,9 @@ Observed browser-path constraints:
 1. Add vision/ASR analysis-record inspection beyond serialized caption transcript data.
 2. Add persisted undo checkpoints around the existing command transaction.
 3. Expand `project.render` with captions, stickers, overlays, transitions, effects, source audio, progress events, and cancellation diagnostics.
-4. Add MCP as a thin transport adapter over the same registry.
-5. Prefer the CLI from this Skill when an operation is supported, retaining browser control as the compatibility path.
+4. Add structured progress and cancellation to the MCP and CLI paths for long-running analysis and rendering.
+5. Prefer local STDIO MCP, then the CLI, for project files; use browser WebMCP for supported edits to the open project, retaining UI control as the compatibility path.
+
+## Split-screen and frame-sync commands
+
+`project.split_screen` takes ordered `clipIds`, `layout` (`columns`, `rows`, `grid`) and absolute project `time`. It includes every visible active main/overlay picture, preserves timing, and crops proportionally. `overlay.sync_reference` takes a video overlay `clipId`, `referenceClipId`, `targetTime` and `referenceTime` to align two explicitly observed project frames without changing source timing. Both use the shared command registry and semantic preview/apply. See [the full contract](split-screen-and-frame-sync.md) for examples, rejection rules, collision behavior, persistent cells and browser-only split-screen rendering limits.

@@ -45,20 +45,19 @@ Then try a safe edit and export:
 
 ## For developers: what is included
 
-- Seven model-facing tools for project, track, clip, and transcript inspection; semantic diff; transactional apply; and verified MP4 rendering.
+- Eight tools cover project, track, clip, transcript and marker inspection, semantic diff, transactional apply, and verified MP4 rendering.
 - Revision checks and idempotent operation IDs for safe project mutation.
 - A real filesystem boundary through `allowedRoots`, including symlink-escape protection for inputs and outputs.
 - Harness cancellation propagated to the Timeline Studio child process.
 - The complete `edit-timeline-studio` Skill under `.dsh/skills`.
 - Unit tests and a real DeepSeek Harness/Cordis end-to-end test.
 
-Browser-only WebGPU generation and rich browser rendering remain in the Timeline Studio editor. The plugin reports unsupported operations as tool errors instead of silently dropping them.
+The editor provides the Sound FX library, timeline fade controls, alignment guides, and beat template appends. Open the edited project in Timeline Studio and export there for effects, overlays, and audio fades.
 
 ## Requirements
 
-- DeepSeek Harness `0.1.0-rc.6` Developer Preview
-- Node.js `22.20+` or `24+`
-- A local Timeline Studio checkout with dependencies installed
+- DeepSeek Harness `0.2.2-rc.1` with Node.js `24.9+`. The plugin tool pipeline also runs with the `0.1.1-rc.2` SDK.
+- A local Timeline Studio checkout with dependencies installed. Use revision `18c1c69` or newer for the features documented here.
 - FFmpeg and ffprobe for media import and rendering
 
 ## Quick start
@@ -77,7 +76,9 @@ TIMELINE_PROJECTS_ROOT=/absolute/path/to/projects \
 dsh --profile web
 ```
 
-The bundle remains disabled when `TIMELINE_STUDIO_ROOT` is unset, so an unconfigured installation cannot break an existing Harness profile. Set the environment variables and restart, then verify the enabled and mounted state under **Settings → Plugins → Plugin list**.
+Set `TIMELINE_STUDIO_ROOT` to the checkout containing `scripts/timeline-command.mjs` and `TIMELINE_PROJECTS_ROOT` to the directory the tools may access. If the latter is unset, tools use the launch directory. Restart Harness and verify **Settings → Plugins → Plugin list**. [PowerShell and Skill setup](docs/integration.md)
+
+After installation, copy the packaged Skill into your workspace or Harness home using the [Skill setup steps](docs/integration.md#skill-installation).
 
 For local plugin development, npm link is also supported:
 
@@ -113,6 +114,10 @@ The environment-driven example is available at [`config/timeline-studio.cordis.y
 5. Only after a successful diff, call `timeline_studio_project_apply`.
 6. Inspect the output project and optionally call `timeline_studio_project_render`.
 
+## Project updates
+
+- **2026-11-11** — The plugin uses the host tool registry, adds marker inspection, and syncs the [Timeline Studio Skill](https://github.com/MartinDelophy/ai-video-editor/tree/18c1c69836a5174c959beca725008ff96a5ceed5/skills/edit-timeline-studio) with current audio and template workflows.
+
 ## Documentation
 
 - [Timeline Studio main repository and full editor](https://github.com/MartinDelophy/ai-video-editor)
@@ -127,7 +132,7 @@ npm run check
 TIMELINE_STUDIO_ROOT=/absolute/path/to/web_player npm run test:e2e
 ```
 
-DeepSeek Harness is still a Developer Preview and may introduce compatibility-breaking changes. This project pins the tested rc.6 packages and keeps editing logic in Timeline Studio so the Harness adapter remains thin.
+The plugin registers its tools with the Harness host. The pinned Harness SDK packages in this repository are used by development checks.
 
 ## Responsible use notice
 

@@ -45,20 +45,19 @@
 
 ## 面向开发者：包含能力
 
-- 7 个模型工具：检查工程、轨道、片段和字幕；语义差异预演；事务式应用编辑；验证 MP4 渲染结果。
+- 8 个工具覆盖工程、轨道、片段、字幕和标记检查，以及语义差异预演、事务式编辑和 MP4 渲染验证。
 - 使用 revision 与幂等 operation ID，避免过期写入和重复执行。
 - 通过 `allowedRoots` 实施真实文件访问边界，并阻止输入、输出路径通过符号链接逃逸。
 - 将 Harness 的取消信号传递给 Timeline Studio 子进程。
 - 在 `.dsh/skills` 中携带完整 `edit-timeline-studio` Skill。
 - 单元测试，以及经过真实 DeepSeek Harness/Cordis 工具流水线的端到端测试。
 
-WebGPU AI 生成和复杂浏览器渲染仍由 Timeline Studio 编辑器负责。遇到尚未支持的操作时，插件会明确返回工具错误，不会静默丢失效果。
+音效库、时间轴淡入淡出控件、对齐辅助线和卡点模板追加都在 Timeline Studio 编辑器中使用。需要导出特效、叠加层或音频淡入淡出时，请打开工程并在编辑器中导出。
 
 ## 环境要求
 
-- DeepSeek Harness `0.1.0-rc.6` Developer Preview
-- Node.js `22.20+` 或 `24+`
-- 已安装依赖的本地 Timeline Studio 仓库
+- DeepSeek Harness `0.2.2-rc.1` 和 Node.js `24.9+`。插件工具也通过了 `0.1.1-rc.2` SDK 的执行验证。
+- 已安装依赖的本地 Timeline Studio 仓库。本文列出的功能以 `18c1c69` 或更新版本为准。
 - 用于媒体导入和渲染的 FFmpeg 与 ffprobe
 
 ## 快速开始
@@ -77,7 +76,9 @@ TIMELINE_PROJECTS_ROOT=/绝对路径/projects \
 dsh --profile web
 ```
 
-Bundle 在未设置 `TIMELINE_STUDIO_ROOT` 时保持禁用，避免尚未配置的安装影响现有 Harness profile。设置环境变量并重新启动后，可以在 **设置 → 插件 → 插件列表** 中确认它已经启用并挂载。
+将 `TIMELINE_STUDIO_ROOT` 指向包含 `scripts/timeline-command.mjs` 的仓库根目录，将 `TIMELINE_PROJECTS_ROOT` 指向允许工具访问的目录。省略后者时使用启动目录。重启 Harness 后，在 **设置 → 插件 → 插件列表** 查看挂载状态。[PowerShell 和 Skill 配置](docs/integration.zh-CN.md)
+
+安装后按 [Skill 配置步骤](docs/integration.zh-CN.md#skill-安装)将随包 Skill 复制到工作区或 Harness 用户目录。
 
 本地插件开发也可以使用 npm link：
 
@@ -113,6 +114,10 @@ npm link dsh-timeline-studio-plugin
 5. 只有 diff 成功后，才调用 `timeline_studio_project_apply`。
 6. 重新检查输出工程，并按需调用 `timeline_studio_project_render`。
 
+## 项目更新
+
+- **2026-11-11** — 插件改用宿主工具注册服务，新增标记检查，并同步 [Timeline Studio Skill](https://github.com/MartinDelophy/ai-video-editor/tree/18c1c69836a5174c959beca725008ff96a5ceed5/skills/edit-timeline-studio) 中的音效和模板流程。
+
 ## 文档
 
 - [Timeline Studio 主仓库与完整编辑器](https://github.com/MartinDelophy/ai-video-editor)
@@ -127,7 +132,7 @@ npm run check
 TIMELINE_STUDIO_ROOT=/绝对路径/web_player npm run test:e2e
 ```
 
-DeepSeek Harness 仍处于 Developer Preview，后续可能发生破坏性兼容变更。本项目锁定已经验证的 rc.6 依赖，并将编辑业务逻辑留在 Timeline Studio 中，使 Harness 适配层保持轻薄。
+插件通过 Harness 宿主注册工具。仓库固定的 Harness SDK 包用于开发验证。
 
 ## 深度合成责任使用声明
 
