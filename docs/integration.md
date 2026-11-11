@@ -14,7 +14,15 @@ TIMELINE_PROJECTS_ROOT=/absolute/path/to/projects \
 dsh --profile web
 ```
 
-The bundle remains disabled until `TIMELINE_STUDIO_ROOT` is present; restart after setting it to mount the plugin.
+The bundle remains disabled until `TIMELINE_STUDIO_ROOT` is present. Set it to the repository root containing `scripts/timeline-command.mjs`, then restart.
+
+On Windows, run the following in PowerShell.
+
+```powershell
+$env:TIMELINE_STUDIO_ROOT = 'C:\dev\web_player'
+$env:TIMELINE_PROJECTS_ROOT = 'C:\media\projects'
+dsh --profile web
+```
 
 English | [简体中文](integration.zh-CN.md)
 
@@ -50,12 +58,12 @@ Existing input paths are resolved with `realpath`. Output symlinks are rejected,
 
 DeepSeek Harness discovers project skills from `<projectRoot>/.dsh/skills`. This repository already contains `.dsh/skills/edit-timeline-studio`.
 
-When the npm plugin is linked into another Harness workspace, copy or link the complete skill directory into that workspace. Keep its `references`, `docs`, and `scripts` subdirectories together with `SKILL.md`.
+Find the Skill at `profiles/web/node_modules/dsh-timeline-studio-plugin/.dsh/skills/edit-timeline-studio` under your Harness home. Copy the `edit-timeline-studio` directory to your workspace's `.dsh/skills` or to `$DSH_HOME/skills` (default `~/.dsh/skills`) for all workspaces. Keep `references`, `docs`, and `scripts` together with `SKILL.md`. Refresh this copy when you upgrade the bundle.
 
 ## Capability boundary
 
-The command path currently supports portable project inspection, registered edit operations, media import, and the documented Visuals + Voiceover + Music MP4 renderer. AI generation, visible captions, stickers, overlays, advanced effects, and other browser-render-only features remain in the editor. Rendering rejects unsupported composition features instead of omitting them.
+The command path currently supports portable project inspection, registered edit operations, media import, and the documented Visuals + Voiceover + Music MP4 renderer. Use the editor for the Sound FX library, audio fades in exported video, advanced composition and beat template appends. Template appends through WebMCP run in the open editor.
 
 ## Version policy
 
-The plugin is validated against DeepSeek Harness `0.1.0-rc.6`, `@deepseek-ai/dsh-tools` `0.1.0-rc.6`, and Cordis `4.0.1`. Because Harness is a Developer Preview, upgrade these packages intentionally and rerun both `npm run check` and `npm run test:e2e`.
+The bundle registers tools with the host's `tools` service and ships without a Harness runtime dependency. See [testing](testing.md) for the validated versions and checks.

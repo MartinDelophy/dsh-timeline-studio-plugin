@@ -10,6 +10,7 @@ const COMMANDS = new Set([
   "track.inspect",
   "clip.inspect",
   "transcript.inspect",
+  "marker.inspect",
   "project.diff",
   "project.run",
   "project.render",
@@ -97,7 +98,7 @@ export async function createTimelineCommandRunner(options) {
 
   async function validateRequest(command, requestPath) {
     const canonicalRequest = await assertAllowedExisting(requestPath, "request file");
-    if (command === "project.inspect" || command === "track.inspect" || command === "clip.inspect" || command === "transcript.inspect") {
+    if (command === "project.inspect" || command === "track.inspect" || command === "clip.inspect" || command === "transcript.inspect" || command === "marker.inspect") {
       return canonicalRequest;
     }
 

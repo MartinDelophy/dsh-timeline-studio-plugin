@@ -10,6 +10,7 @@ All path arguments must be absolute and must resolve inside `allowedRoots`. Tool
 | `timeline_studio_track_inspect` | `project`, `track` | Ordered timing summaries for one track. |
 | `timeline_studio_clip_inspect` | `project`, `clipId` | Clip source mapping, timing, links, transforms, and serialized properties. |
 | `timeline_studio_transcript_inspect` | `project`, optional `audioClipId` | Caption segments, words, speakers, timing, and audio associations. |
+| `timeline_studio_marker_inspect` | `project`, optional `markerId` | Markers, chapters, ranges, and notes sorted by project time, or one annotation by ID. |
 | `timeline_studio_project_diff` | `plan` | Semantic dry run using the real command registry; never writes the output project. |
 | `timeline_studio_project_apply` | `plan` | Transactional project write after revision and operation validation. |
 | `timeline_studio_project_render` | `request` | Verified H.264/AAC MP4 for the supported portable subset. |
@@ -37,6 +38,10 @@ All path arguments must be absolute and must resolve inside `allowedRoots`. Tool
 
 Always call `timeline_studio_project_diff` before `timeline_studio_project_apply`. A successful non-empty batch increments the project revision once. Reused operation IDs are no-ops, while a stale revision with new operations fails.
 
+Use `marker.add`, `marker.update`, and `marker.delete` in edit plans. Inspect the resulting annotations after apply. Markers do not extend the project render.
+
+Use `clip.set_property` with `fadeIn` or `fadeOut` (seconds) to store an audio or music clip fade in the project. Open the edited archive in Timeline Studio for audible verification and export.
+
 ## Render request
 
 ```json
@@ -56,4 +61,4 @@ Always call `timeline_studio_project_diff` before `timeline_studio_project_apply
 }
 ```
 
-The renderer verifies the final container, dimensions, duration, and audio presence. It rejects unsupported visible features instead of dropping them.
+The portable renderer verifies the container, dimensions, duration, and audio presence. Export in the editor for audio fades, timeline effects, overlays, or beat templates.
